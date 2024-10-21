@@ -1,5 +1,6 @@
 from config import *
 from crud_operations import *
+from ratings_crud import *
 
 # Route for home (with forms)
 @app.route('/')

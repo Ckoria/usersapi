@@ -9,9 +9,9 @@ def get_ratings():
                      "Date Created": rating.Date_Created, "Last Updatd": rating.Date_Updated} 
                     for rating in ratings]), 200
     
-@app.route('/get_user/<int:id>', methods=['GET'])
+@app.route('/get_rating/<int:id>', methods=['GET'])
 @require_api_key
-def get_user(id):
+def get_rating(id):
     user = PortfolioRatings.query.filter(PortfolioRatings.id == id).first()
     if user:
         user = user.__dict__
@@ -21,9 +21,9 @@ def get_user(id):
     else:
         return jsonify({"msg": "PortfolioRatings does not exist"}), 400
     
-@app.route('/del_user/<int:id>', methods=['DELETE'])
+@app.route('/del_rating/<int:id>', methods=['DELETE'])
 @require_api_key
-def delete_user(id):
+def delete_rating(id):
     user = PortfolioRatings.query.get_or_404(id)
     if user:
         db.session.delete(user) 
@@ -32,9 +32,9 @@ def delete_user(id):
     else:
         return jsonify({"msg": "PortfolioRatings does not exist"}), 400
     
-@app.route('/update_user/<int:id>', methods=['PUT'])
+@app.route('/update_rating/<int:id>', methods=['PUT'])
 @require_api_key
-def update_user(id):
+def update_rating(id):
     user = PortfolioRatings.query.get_or_404(id)
     if user:
         data = request.get_json()
@@ -47,12 +47,14 @@ def update_user(id):
 
 @app.route('/add_rating', methods=['POST'])
 @require_api_key
-def add_user(data):
+def add_rating():
+    data = request.get_json()
+    print(data)
     if data:
-        is_duplicate = PortfolioRatings.query.filter_by(ip_address=data['ipAddress']).first()
+        is_duplicate = PortfolioRatings.query.filter_by(ip_address=data['ip_address']).first()
         if is_duplicate:
-            return is_duplicate
-        db.session.add(PortfolioRatings(ip_address=data["ipAddress"], rate=data["rating"])) 
+            return jsonify({"msg": "Avoid duplicates"}), 400
+        db.session.add(PortfolioRatings(ip_address=data["ip_address"], rate=data["rating"])) 
         db.session.commit()
         return jsonify({"msg": "New Portfolio Ratings Added"}), 200
     else:

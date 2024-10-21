@@ -35,7 +35,7 @@ def avoid_duplicates(email, cell):
 
 
 @app.route('/get_users', methods=['GET'])
-@require_api_key
+# @require_api_key
 def get_users():
     users = User.query.all()
     return jsonify([{"id": user.id, "name": user.name, "email": user.email, 
