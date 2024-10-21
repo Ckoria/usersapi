@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="static/css/logo.css">
+    <script defer src="static/scripts/switch_forms.js"></script>
+</head>
+<body>
+    <!-- Flash message block -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class={{ category }}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <div class="container">
+        <div class="animated-image">
+            <img src="static/images/joyful-dog-having-fun-removebg.png" alt="Animated Image">
+        </div>
+    </div>
+</body>
+</html>

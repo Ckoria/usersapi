@@ -9,6 +9,16 @@
     <script defer src="static/scripts/switch_forms.js"></script>
 </head>
 <body>
+    <!-- Flash message block -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
     <header class="logo-header">
         <h1 class="logo">Izinja ze'Game API Solutions 🐩</h1>
     </header>
