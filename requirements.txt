@@ -4,4 +4,4 @@ flask_sqlalchemy
 psycopg2
 werkzeug
 Flask-Cors==4.0.1
-gunicorn
+gunicorn==23.0.0
