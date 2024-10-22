@@ -62,7 +62,7 @@ def add_rating():
         if is_duplicate:
             delete_rating(is_duplicate.id)
         
-        db.session.add(PortfolioRatings(ip_address=data["ip_address"], rate=data["rating"])) 
+        db.session.add(PortfolioRatings(ip_address=data["ip_address"], rate=int(data["rating"]))) 
         db.session.commit()
         return jsonify({"msg": "New Portfolio Ratings Added"}), 200
     else:
