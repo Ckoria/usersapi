@@ -9,7 +9,7 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-db_url = f'postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PASS")}@pg-267cb4d3-ckoria.c.aivencloud.com:{os.getenv("PORT")}/{os.getenv("DB_NAME")}'
+db_url = f'postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PASS")}@pg-267cb4d3-ckoria.c.aivencloud.com:{14406}/{os.getenv("DB_NAME")}'
 app.secret_key = os.getenv("SQLALCHEMY_KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 
