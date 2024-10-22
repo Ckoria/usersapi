@@ -2,7 +2,7 @@ from config import *
 from functools import wraps
 
 
-# Simple function to verify API key
+# verify API key
 def require_api_key(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -10,7 +10,6 @@ def require_api_key(f):
         if not api_key:
             return jsonify({"msg": "API key is missing"}), 401
         
-        # Query your database or any storage to check if the API key exists
         key = os.getenv("APIKEY")
         if key != api_key:
             return jsonify({"msg": "Invalid API key"}), 403

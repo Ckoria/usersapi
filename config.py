@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify 
 from dotenv import load_dotenv
+from flask_cors import CORS
 from datetime import datetime
 import os
 
@@ -13,7 +14,7 @@ app.secret_key = os.getenv("SQLALCHEMY_KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 
 db = SQLAlchemy(app)
-
+CORS(app)
 
 # Define User model
 class User(db.Model):
