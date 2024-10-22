@@ -12,7 +12,7 @@ def require_api_key(f):
         
         key = os.getenv("APIKEY")
         if key != api_key:
-            return jsonify({"msg": "Invalid API key"}), 403
+            return jsonify({"msg": f"Invalid API key {api_key} {key}"}), 403
         
         return f(*args, **kwargs)
     return decorated_function
