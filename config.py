@@ -9,7 +9,7 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-db_url = f'postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PASS")}@pg-267cb4d3-ckoria.c.aivencloud.com:{os.getenv("PORT")}/{os.getenv("DB_NAME")}'
+db_url = f'postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PASS")}@pg-267cb4d3-ckoria.c.aivencloud.com:{14406}/{os.getenv("DB_NAME")}'
 app.secret_key = os.getenv("SQLALCHEMY_KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 
@@ -32,6 +32,6 @@ class User(db.Model):
 class PortfolioRatings(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ip_address = db.Column(db.String(30), nullable=False)
-    rate = db.Column(db.Integer, unique=False, nullable=False)
+    rate = db.Column(db.Float(precision = 2), unique=False, nullable=False)
     Date_Created = db.Column(db.DateTime(), default= datetime.now, nullable = False)
     Date_Updated = db.Column(db.DateTime(), default= datetime.now, onupdate= datetime.now, nullable = False)

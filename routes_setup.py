@@ -1,6 +1,7 @@
 from config import *
 from crud_operations import *
 from ratings_crud import *
+import requests
 
 # Route for home (with forms)
 @app.route('/')
@@ -52,7 +53,16 @@ def login():
     else:
         flash("Login failed. Account does not exist", "error")
         return render_template("index.html")
-    
+
+API_KEY = os.getenv('API_KEY')
+
+@app.route('/api/external', methods=['GET'])
+def call_external_api():
+    url = "https://example.com/api/data"
+    headers = {'api-key': API_KEY}
+    response = requests.get(url, headers=headers)
+    return jsonify(response.json())
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404

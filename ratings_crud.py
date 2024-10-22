@@ -5,6 +5,7 @@ import json
 @app.route('/get_ratings', methods=['GET'])
 @require_api_key
 def get_ratings():
+    print("Get Data")
     ratings = PortfolioRatings.query.all()
     return jsonify([{"id": rating.id, "ip": rating.ip_address, "rate": rating.rate, 
                      "createdOn": rating.Date_Created, "updatdOn": rating.Date_Updated} 
@@ -61,8 +62,10 @@ def add_rating():
         is_duplicate = PortfolioRatings.query.filter_by(ip_address=data['ip_address']).first()
         if is_duplicate:
             delete_rating(is_duplicate.id)
-        
-        db.session.add(PortfolioRatings(ip_address=data["ip_address"], rate=int(data["rating"]))) 
+        print("Check data  \n",data)
+        if(data["rating"]):
+            rate= float(data["rating"])
+        db.session.add(PortfolioRatings(ip_address=data["ip_address"], rate=data["rating"])) 
         db.session.commit()
         return jsonify({"msg": "New Portfolio Ratings Added"}), 200
     else:
