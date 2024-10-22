@@ -46,10 +46,10 @@ def update_rating(id):
         return jsonify({"msg": "PortfolioRatings does not exist"}), 400
 
 @app.route('/add_rating', methods=['POST'])
-@require_api_key
+# @require_api_key
 def add_rating():
     data = request.get_json()
-    print(data)
+    print("Payload : ", data)
     if data:
         is_duplicate = PortfolioRatings.query.filter_by(ip_address=data['ip_address']).first()
         if is_duplicate:
